@@ -204,7 +204,7 @@ public class EnsembleTracker implements Closeable, CuratorWatcher
     {
         Properties properties = new Properties();
         properties.load(new ByteArrayInputStream(data));
-        log.info("New config event received: {}", properties);
+        log.info("[GBIF-PATCH-CURATOR] New config event received: {}", properties);
 
         if (!properties.isEmpty())
         {
@@ -213,16 +213,20 @@ public class EnsembleTracker implements Closeable, CuratorWatcher
             if (connectionString.trim().length() > 0)
             {
                 currentConfig.set(newConfig);
-                ensembleProvider.setConnectionString(connectionString);
+                log.info("[GBIF-PATCH-CURATOR] Avoiding changing connection string from : {} to  {}", ensembleProvider.getConnectionString(), connectionString);
+                if (System.getProperty("curator.connectionString.update.enabled") != null)
+                {
+                    ensembleProvider.setConnectionString(connectionString);
+                }
             }
             else
             {
-                log.debug("Invalid config event received: {}", properties);
+                log.debug("[GBIF-PATCH-CURATOR] - Invalid config event received: {}", properties);
             }
         }
         else
         {
-            log.debug("Ignoring new config as it is empty");
+            log.debug("[GBIF-PATCH-CURATOR] - Ignoring new config as it is empty");
         }
     }
 }

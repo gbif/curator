@@ -31,7 +31,7 @@
 
     <groupId>org.apache.curator</groupId>
     <artifactId>apache-curator</artifactId>
-    <version>5.5.0</version>
+    <version>5.5.0-disable-connectstr-updates-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>Apache Curator</name>
@@ -120,11 +120,10 @@
     </properties>
 
     <scm>
-        <url>https://github.com/apache/curator.git</url>
-        <connection>scm:git:https://gitbox.apache.org/repos/asf/curator.git</connection>
-        <developerConnection>scm:git:https://gitbox.apache.org/repos/asf/curator.git
-        </developerConnection>
-        <tag>apache-curator-5.5.0</tag>
+        <connection>scm:git:git@github.com:gbif/curator.git</connection>
+        <url>https://github.com/gbif/curator</url>
+        <developerConnection>scm:git:git@github.com:gbif/curator.git</developerConnection>
+        <tag>HEAD</tag>
     </scm>
 
     <issueManagement>
@@ -150,10 +149,14 @@
     </ciManagement>
 
     <distributionManagement>
-        <site>
-            <id>apache.website.svnpub</id>
-            <url>scm:svn:https://svn.apache.org/repos/asf/curator/site/trunk</url>
-        </site>
+        <repository>
+            <id>thirdparty</id>
+            <url>http://repository.gbif.org/content/repositories/thirdparty/</url>
+        </repository>
+        <snapshotRepository>
+            <id>thirdparty-snapshot</id>
+            <url>http://repository.gbif.org/content/repositories/thirdparty-snapshot/</url>
+        </snapshotRepository>
     </distributionManagement>
 
     <mailingLists>
